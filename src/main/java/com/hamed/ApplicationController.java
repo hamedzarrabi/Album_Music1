@@ -41,9 +41,9 @@ public class ApplicationController {
 		return "portfolio";
 	}
 
-	@GetMapping("/service")
+	@GetMapping("services_album")
 	public String service() {
-		return "services";
+		return "services_album";
 	}
 
 }

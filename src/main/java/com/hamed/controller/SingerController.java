@@ -1,9 +1,7 @@
 package com.hamed.controller;
 
 import com.hamed.model.Singer;
-import com.hamed.repository.SingerRepository;
 import com.hamed.service.SingerService;
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,7 +45,7 @@ public class SingerController {
     public String getSingers(Model model) {
         List<Singer> singers = singerService.getSinger();
         model.addAttribute("singers", singers);
-        return "services";
+        return "services_album";
     }
 
 

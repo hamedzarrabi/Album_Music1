@@ -43,7 +43,7 @@ public class AlbumController {
     public String getAlbums(Model model) {
         List<Album> albums = albumService.getAlbum();
         model.addAttribute("albums", albums);
-        return "services";
+        return "services_album";
     }
 
 

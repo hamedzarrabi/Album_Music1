@@ -44,8 +44,8 @@ public class GenreController {
 
     @GetMapping(value = "services/genre")
     public String getGenres(Model model) {
-        List<Genre> genre = genreService.getGenre();
-        model.addAttribute("genre", genre);
-        return "services";
+        List<Genre> genres = genreService.getGenre();
+        model.addAttribute("genres", genres);
+        return "services_album";
     }
 }

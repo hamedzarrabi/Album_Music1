@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Services - Flattern Bootstrap Template</title>
+  <title>Services - Add | Edit Album-Music</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -44,7 +44,7 @@
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
         <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">contact@example.com</a></i>
-        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+1 5589 55488 55</span></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+98 912 443 1480</span></i>
       </div>
       <div class="social-links d-none d-md-flex align-items-center">
         <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -60,7 +60,7 @@
     <div class="container d-flex justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a href="index.html">Flattern</a></h1>
+        <h1 class="text-light"><a href="index.html">Music</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -69,7 +69,14 @@
         <ul>
           <li><a class="active" th:href="@{/}">Home</a></li>
           <li><a th:href="@{/about}">About</a></li>
-          <li><a th:href="@{/service}">Services</a></li>
+
+          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a th:href="@{/services_album}">Service Albums</a></li>
+              <li><a href="#">Service Musics</a></li>
+              <li><a href="#">Service Users</a></li>
+            </ul>
+
           <li><a href="testimonials.html">Musics</a></li>
           <li><a href="pricing.html">Singers</a></li>
           <li><a th:href="@{/portfolio}">Portfolio</a></li>
@@ -78,6 +85,7 @@
           <li><a>   |   </a></li>
           <li><a th:href="@{/login}">Login</a></li>
           <li><a th:href="@{/register}">Registery</a></li>
+
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -92,10 +100,10 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Services</h2>
+          <h2>Service Add & Edit Albums</h2>
           <ol>
             <li><a href="index.html">Home</a></li>
-            <li>Services</li>
+            <li>Services Album</li>
           </ol>
         </div>
 
@@ -106,28 +114,14 @@
     <section id="services" class="services">
       <div class="container">
 
-        <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box" data-aos="fade-up">
-              <div class="icon"><i class="bi bi-music-player"></i></div>
-              <h4 class="title"><button class="btn" data-bs-toggle="modal" data-bs-target="#addModal">Add | Edit Music</button></h4>
-              <p class="description">Add and edit (delete, update) musics for website</p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="d-flex justify-content-center">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="bi bi-mic"></i></div>
-              <h4 class="title"><a href="">Add | Edit Singer</a></h4>
-              <p class="description">Add and edit (delete, update) singers for website</p>
+              <h4 class="title"><button class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#addModal">Add | Edit Album</button></h4>
+              <p class="description">Add and Edit (DELETE, UPDATE) Singers for Website</p>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-              <div class="icon"><i class="bi bi-play"></i></div>
-              <h4 class="title"><a href="">Add | Edit Album</a></h4>
-              <p class="description">Add and edit (delete, update) albums for website</p>
-            </div>
-          </div>
+
 
         </div>
 
@@ -135,70 +129,6 @@
     </section><!-- End Services Section -->
 
     <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Some <strong>Features</strong> we do provide</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 mb-5 mb-lg-0" data-aos="fade-right">
-            <ul class="nav nav-tabs flex-column">
-              <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">
-                  <h4>Modi sit est</h4>
-                  <p>Quis excepturi porro totam sint earum quo nulla perspiciatis eius.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">
-                  <h4>Unde praesentium sed</h4>
-                  <p>Voluptas vel esse repudiandae quo excepturi.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">
-                  <h4>Pariatur explicabo vel</h4>
-                  <p>Velit veniam ipsa sit nihil blanditiis mollitia natus.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">
-                  <h4>Nostrum qui quasi</h4>
-                  <p>Ratione hic sapiente nostrum doloremque illum nulla praesentium id</p>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-lg-7 ml-auto" data-aos="fade-left" data-aos-delay="100">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
-                <figure>
-                  <img src="assets/img/features-1.png" alt="" class="img-fluid">
-                </figure>
-              </div>
-              <div class="tab-pane" id="tab-2">
-                <figure>
-                  <img src="assets/img/features-2.png" alt="" class="img-fluid">
-                </figure>
-              </div>
-              <div class="tab-pane" id="tab-3">
-                <figure>
-                  <img src="assets/img/features-3.png" alt="" class="img-fluid">
-                </figure>
-              </div>
-              <div class="tab-pane" id="tab-4">
-                <figure>
-                  <img src="assets/img/features-4.png" alt="" class="img-fluid">
-                </figure>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
 
 
         <div class="modal fade" id="addModal" role="dialog">
@@ -212,7 +142,11 @@
 
                     </div>
                     <div class="modal-body">
+
                         <p>Add Music</p>
+
+                      <form th:action="@{/services/addNewSinger}" method="post">
+
 
                         <div class="input-group mb-3">
                           <input type="text" class="form-control" placeholder="Name Music" id="addName" name="addName">
@@ -226,18 +160,19 @@
                           <input type="number" class="form-control" placeholder="Price" id="addPrice" name="addPrice">
                         </div>
 
-                      <div class="input-group mb-3">
+                      <div class="mb-3">
                         <select type="text" class="form-control" id="addGenre" name="addGenre">
                           <option>-SELECT-</option>
-                          <option th:each="genre : ${genres}"
+                          <option th:each ="genre : ${genres}"
                                   th:value="${genre.id}"
-                                  th:text="${genre.genre}">
+                                  th:text ="${genre.genre}">
                           </option>
                         </select>
                       </div>
 
-
+                      </form>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-warning" data-bs-dismiss="modal">Close</button>
                     </div>

@@ -23,7 +23,7 @@ public class UserController {
     public String getUser(Model model) {
         List<User> users = userService.getSinger();
         model.addAttribute("users", users);
-        return "services";
+        return "services_album";
     }
 
     @PostMapping("services/addNewUser")
