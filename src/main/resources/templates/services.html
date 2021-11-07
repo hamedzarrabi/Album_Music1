@@ -229,8 +229,9 @@
                       <div class="input-group mb-3">
                         <select type="text" class="form-control" id="addGenre" name="addGenre">
                           <option>-SELECT-</option>
-                          <option th:each="genre : ${}">
-
+                          <option th:each="genre : ${genres}"
+                                  th:value="${genre.id}"
+                                  th:text="${genre.genre}">
                           </option>
                         </select>
                       </div>
