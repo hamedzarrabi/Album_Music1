@@ -2,6 +2,7 @@ package com.hamed.controller;
 
 import com.hamed.model.Singer;
 import com.hamed.repository.SingerRepository;
+import com.hamed.service.SingerService;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,34 +18,34 @@ import java.util.Optional;
 @Controller
 public class SingerController {
 
-    @Autowired private SingerRepository singerRepository;
+    @Autowired private SingerService singerService;
 
     @PostMapping(value = "services/addNewSinger")
     public String addNew(Singer singer) {
-        singerRepository.save(singer);
+        singerService.save(singer);
         return "redirect:/services";
     }
 
     @RequestMapping(value = "services/updateSingers", method = {RequestMethod.PUT, RequestMethod.GET})
     public String update(Singer singer){
-        singerRepository.save(singer);
+        singerService.save(singer);
         return "redirect:/services";
     }
 
     @RequestMapping(value = "services/deleteSinger", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(Long id) {
-        singerRepository.deleteById(id);
+        singerService.delete(id);
         return "redirect:/services";
     }
 
     @GetMapping("services/findByIdSinger")
     public Optional<Singer> findById(Long id) {
-        return singerRepository.findById(id);
+        return singerService.findById(id);
     }
 
     @GetMapping(value = "services/singers")
     public String getSingers(Model model) {
-        List<Singer> singers = singerRepository.findAll();
+        List<Singer> singers = singerService.getSinger();
         model.addAttribute("singers", singers);
         return "services";
     }
