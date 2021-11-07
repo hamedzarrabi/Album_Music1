@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -109,7 +110,7 @@
           <div class="col-lg-4 col-md-6">
             <div class="icon-box" data-aos="fade-up">
               <div class="icon"><i class="bi bi-music-player"></i></div>
-              <h4 class="title"><a href="">Add | Edit Music</a></h4>
+              <h4 class="title"><button class="btn" data-bs-toggle="modal" data-bs-target="#addModal">Add | Edit Music</button></h4>
               <p class="description">Add and edit (delete, update) musics for website</p>
             </div>
           </div>
@@ -198,7 +199,56 @@
         </div>
 
       </div>
+
+
+        <div class="modal fade" id="addModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="btn-close"  data-bs-dismiss="modal"></button>
+                        <br>
+
+                    </div>
+                    <div class="modal-body">
+                        <p>Add Music</p>
+
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="Name Music" id="addName" name="addName">
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <input type="date" class="form-control" placeholder="Date Publish" id="addDatePublish" name="addDatePublish">
+                        </div>
+
+                        <div class="input-group mb-3">
+                          <input type="number" class="form-control" placeholder="Price" id="addPrice" name="addPrice">
+                        </div>
+
+                      <div class="input-group mb-3">
+                        <select type="text" class="form-control" id="addGenre" name="addGenre">
+                          <option>-SELECT-</option>
+                          <option th:each="genre : ${}">
+
+                          </option>
+                        </select>
+                      </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-warning" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </section><!-- End Features Section -->
+<!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-bs-whatever="@mdo">New Employee</button>-->
+
+
 
   </main><!-- End #main -->
 
