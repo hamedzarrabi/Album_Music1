@@ -1,7 +1,11 @@
 package com.hamed.controller;
 
 import com.hamed.model.Album;
+import com.hamed.model.Genre;
+import com.hamed.model.Singer;
 import com.hamed.service.AlbumService;
+import com.hamed.service.GenreService;
+import com.hamed.service.SingerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,37 +18,44 @@ import java.util.Optional;
 public class AlbumController {
 
     @Autowired private AlbumService albumService;
+    @Autowired private GenreService genreService;
+    @Autowired private SingerService singerService;
 
-    @PostMapping("/services/addNewAlbum")
+    @PostMapping("/services_album/addNewAlbum")
     public String addNew(Album album) {
         albumService.save(album);
-        return "redirect:/services";
+        return "redirect:/services_album";
     }
 
-    @RequestMapping (value = "/services/deleteAlbum", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @RequestMapping (value = "/services_album/deleteAlbum", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(Long id) {
         albumService.delete(id);
-        return "redirect:/services";
+        return "redirect:/services_album";
     }
 
-    @RequestMapping(value = "services/updateAlbum", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "services_album/updateAlbum", method = {RequestMethod.PUT, RequestMethod.GET})
     public String update(Album album) {
         albumService.save(album);
-        return "redirect:/services";
+        return "redirect:/services_album";
     }
 
-    @RequestMapping(value = "services/findByIdAlbum")
+    @RequestMapping(value = "services_album/findByIdAlbum")
     @ResponseBody
     public Optional<Album> findById(Long id) {
         return albumService.findById(id);
     }
 
-    @GetMapping(value = "services/albums")
+    @GetMapping(value = "services_album")
     public String getAlbums(Model model) {
+
         List<Album> albums = albumService.getAlbum();
+        List<Genre> genres = genreService.getGenre();
+        List<Singer> singers = singerService.getSinger();
+
         model.addAttribute("albums", albums);
+        model.addAttribute("genres", genres);
+        model.addAttribute("singers", singers);
+
         return "services_album";
     }
-
-
 }

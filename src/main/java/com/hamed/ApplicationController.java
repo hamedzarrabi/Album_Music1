@@ -10,12 +10,12 @@ public class ApplicationController {
 	public String goHome() {
 		return "index";
 	}
-	
+
 	@GetMapping("login")
 	public String loginPage() {
 		return "login";
 	}
-	
+
 	@GetMapping("contact")
 	public String contactPage() {
 		return "contact";
@@ -34,16 +34,6 @@ public class ApplicationController {
 	@GetMapping("/blog")
 	public String blog() {
 		return "blog";
-	}
-
-	@GetMapping("/portfolio")
-	public String portfolio() {
-		return "portfolio";
-	}
-
-	@GetMapping("services_album")
-	public String service() {
-		return "services_album";
 	}
 
 }
