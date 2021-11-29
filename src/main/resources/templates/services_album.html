@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Services - Add | Edit Album-Music</title>
+    <title>Flattern Bootstrap Template - Index</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
     <link href="assets/vendor/aos/aos.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -44,9 +45,11 @@
 <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
         <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-envelope d-flex align-items-center"><a
-                    href="mailto:contact@example.com">contact@example.com</a></i>
-            <i class="bi bi-phone d-flex align-items-center ms-4"><span>+98 912 443 1480</span></i>
+            <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:hamed.zarrabi@gmail.com">hamed.zarrabi@gmail.com</a></i>
+            <i class="bi bi-phone d-flex align-items-center ms-4"> <span>+98 912 443 1480 |</span>
+                <span>Welcome : [[${#request.userPrincipal.principal.fullName}]]</span>
+                <span sec:authentication = "principal.authorities"></span>
+            </i>
         </div>
         <div class="social-links d-none d-md-flex align-items-center">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -72,11 +75,10 @@
                 <li><a class="active" th:href="@{/}">Home</a></li>
                 <li><a th:href="@{/about}">About</a></li>
 
-                <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="#"><span>Admin</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a th:href="@{/services_album}">Service Albums</a></li>
                         <li><a th:href="@{/services_singer}">Service Singers</a></li>
-                        <li><a th:href="@{/services_user}">Service Users</a></li>
                     </ul>
 
                 <li><a href="testimonials.html">Musics</a></li>
@@ -84,16 +86,17 @@
                 <li><a th:href="@{/portfolio}">Portfolio</a></li>
                 <li><a th:href="@{/blog}">Blog</a></li>
                 <li><a th:href="@{/contact}">Contact</a></li>
-                <li><a> | </a></li>
+                <li><a>   |   </a></li>
                 <li><a th:href="@{/login}">Login</a></li>
                 <li><a th:href="@{/register}">Registery</a></li>
 
             </ul>
+
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
     </div>
-</header><!-- End Header -->
+</header>
 
 <main id="main">
 
@@ -111,6 +114,8 @@
 
         </div>
     </section><!-- End Breadcrumbs -->
+
+
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
@@ -134,7 +139,59 @@
         </div>
     </section><!-- End Services Section -->
 
-    <!-- ======= Features Section ======= -->
+    <div class="container">
+
+        <div class="text-success text-center">
+            <h4>[[${message}]]</h4>
+        </div>
+
+        <table class="table table-striped table-bordered">
+            <thead class="bg-secondary">
+
+            <tr>
+                <th>ID</th>
+                <th>Album Name</th>
+                <th>Date Publish</th>
+                <th>Price</th>
+                <th>Genre</th>
+                <th>Demo</th>
+                <th>Size(MB)</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  th:each="alb : ${albums}">
+                <td th:text="${alb.id}">ID</td>
+                <td th:text="${alb.name}">Name</td>
+                <td th:text="${alb.datePublish}">Date Publish</td>
+                <td th:text="${alb.price}"></td>
+                <td th:text="${alb.genre.genre}">Genre</td>
+                <td>
+                    <div class="col">
+                        <audio controls>
+                            <source th:src="@{${alb.music_album}}" type = "audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </td>
+                <td th:text="${alb.size}"></td>
+
+                <td>
+                    <div class="btn-group">
+                        <a th:href="@{/services_album/findById/(id=${alb.id})}" class="btn btn-secondary"
+                           data-bs-toggle="modal" data-bs-target="#editModal" id="editButton"><i
+                                class="fa fa-vcard"></i></a>
+                        <a th:href="@{/services_album/findById/(id=${alb.id})}" class="btn btn-secondary" id="detailsButton" data-bs-toggle="modal" data-bs-target="#detailsModal" ><i class="fa fa-tags"></i></a>
+                        <a th:href="@{/services_album/deleteAlbum/(id=${alb.id})}" class="btn btn-danger" id="deleteButton" onclick="
+                        return confirm('Are you sure you wont to delete this record?')"><i class="fa fa-times-circle-o"></i></a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ======= Add Album ======= -->
 
 
     <div class="modal fade" id="addModal" role="dialog">
@@ -151,30 +208,31 @@
 
                     <p class="bg-info d-flex justify-content-center">Add Album</p>
 
-                    <form th:action="@{/services_album/addNewAlbum}" method="post">
+                    <form th:action="@{/services_album/addNew}" method="post" enctype="multipart/form-data">
 
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="addAlbumName">Album Name</span>
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">Album Name:</label>
                             <input type="text" class="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-default">
+                                   aria-describedby="inputGroup-sizing-default" name="name" required>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="addPublish">Publish Date</span>
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">Date:</label>
                             <input type="date" class="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-default">
+                                   aria-describedby="inputGroup-sizing-default" name="datePublish" required>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-                            <span class="input-group-text">.00</span>
+                        <div class="form-group mb-2">
+                            <label  class="form-label me-3">Price:</label>
+                            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)"  name="price" required>
+
                         </div>
 
-                        <div class="mb-3">
-                            <select type="text" class="form-control" id="addGenre" name="addGenre">
-                                <option>-Genre-</option>
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">Genre:</label>
+                            <select type="text" class="form-select" id="addGenre"  name="genre" required>
+                                <option>-SELECT-</option>
                                 <option th:each="gen : ${genres}"
                                         th:value="${gen.id}"
                                         th:text="${gen.genre}">
@@ -182,20 +240,159 @@
                             </select>
                         </div>
 
+
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control" id="addDemoAlbum" name="music" >
+                                <label for="addDemoAlbum" class="input-group-text">Upload|Album</label>
+                            </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn  btn-success">Save</button>
+                        </div>
+
+
                     </form>
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-default btn-success" data-bs-dismiss="modal">Save</button>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="editModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                    <br>
+
                 </div>
+                <div class="modal-body" >
+
+                    <p class="bg-info d-flex justify-content-center">Edit Album</p>
+
+                    <form th:action="@{/services_album/update}"   th:each="alb : ${albums}" method="put" enctype="multipart/form-data">
+
+
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">ID:</label>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-default" th:value="${alb.id}" name="id" readonly>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">Album Name:</label>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-default" th:value="${alb.name}" name="name" >
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">Date:</label>
+                            <input type="date" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-default" name="datePublish" th:value="${alb.datePublish}">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label  class="form-label me-3">Price:</label>
+                            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" th:value="${alb.price}" name="price" >
+
+                        </div>
+
+                        <div class="form-group mb-3">
+
+                            <label  class="form-label me-3"></label>
+                            <select type="text" class="form-select" id="editGenre"  name="genre">
+                                <option>-SELECT-</option>
+                                <option th:each="gen : ${genres}"
+                                        th:value="${gen.id}"
+                                        th:text="${gen.genre}">
+                                </option>
+                            </select>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-default btn-success">Update</button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="detailsModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                    <br>
+
+                </div>
+                <div class="modal-body" >
+
+                    <p class="bg-info d-flex justify-content-center">Detail Album</p>
+
+                    <form th:action="@{/services_album/update}" th:each="alb : ${albums}" method="put" enctype="multipart/form-data">
+
+
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">ID:</label>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-default" th:value="${alb.id}"  readonly>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">Album Name:</label>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-default" th:value="${alb.name}" name="name" readonly>
+                        </div>
+
+
+                        <div class="form-group mb-3">
+                            <label  class="form-label me-3">Date:</label>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-default" name="datePublish" th:value="${alb.datePublish}"readonly>
+                        </div>
+                     <div class="form-group mb-3">
+                            <label  class="form-label me-3">Genre:</label>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                   aria-describedby="inputGroup-sizing-default" name="datePublish" th:value="${alb.genre.genre}"readonly>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label  class="form-label me-3">Price:</label>
+                            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" th:value="${alb.price}" name="price" readonly>
+
+                        </div>
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </form>
+                </div>
+
+
             </div>
 
         </div>
     </div>
 
-    </section><!-- End Features Section -->
-    <!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-bs-whatever="@mdo">New Employee</button>-->
+    </section><!-- End Add Album -->
+
 
 
 </main><!-- End #main -->
@@ -256,14 +453,14 @@
 
         <div class="me-md-auto text-center text-md-start">
             <div class="copyright">
-                &copy; Copyright <strong><span>Flattern</span></strong>. All Rights Reserved
+                &copy; Copyright <strong><span>HamedZarrabi</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Designed by <a href="https://bootstrapmade.com/">HamedZarrabi</a>
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">
@@ -276,8 +473,7 @@
     </div>
 </footer><!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-        class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="assets/vendor/aos/aos.js"></script>

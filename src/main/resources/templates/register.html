@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<title>Registration Music</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
     
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,40 +23,41 @@
 
 		<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 			<div class="inner">
-				<form action="">
+				<form th:action="@{/process_register}" method="post" th:object="${user}">
 					<h3>Registration | Music</h3>
 					<div class="form-group">
 						<div class="form-wrapper">
-							<label for="">First Name</label>
-							<input type="text" class="form-control">
+							<label >First Name</label>
+							<input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="25">
 						</div>
 						<div class="form-wrapper">
-							<label for="">Last Name</label>
-							<input type="text" class="form-control">
+							<label >Last Name</label>
+							<input type="text" class="form-control" th:field = "*{lastName}" minlength="2" maxlength="25">
 						</div>
 					</div>
 					<div class="form-wrapper">
-						<label for="">Email</label>
-						<input type="text" class="form-control">
+						<label >Email</label>
+						<input type="email" class="form-control" th:field = "*{email}">
 					</div>
 					<div class="form-wrapper">
-						<label for="">Password</label>
-						<input type="password" class="form-control">
+						<label >Password</label>
+						<input type="password" class="form-control" th:field = "*{password}" minlength="5" maxlength="30">
 					</div>
 					<div class="form-wrapper">
-						<label for="">Confirm Password</label>
-						<input type="password" class="form-control">
+						<label >User Name</label>
+						<input type="text" class="form-control" th:field = "*{userName}" minlength="6" maxlength="20">
 					</div>
 					<div class="checkbox">
 						<label>
 							<input type="checkbox"> I caccept the Terms of Use & Privacy Policy.
 							<span class="checkmark"></span>
 						</label>
-          </div>
+          			</div>
           <div >
-            <button>Register Now</button>
+            <button type="submit">Register Now</button>
 					  <a class="btn mt-2 d-flex justify-content-around" th:href="@{/}">Back</a>
           </div>
+
 
 				</form>
 			</div>

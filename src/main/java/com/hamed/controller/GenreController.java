@@ -19,33 +19,33 @@ public class GenreController {
     @Autowired
     private GenreService genreService;
 
-    @PostMapping(value = "services/addNewGenre")
+    @PostMapping(value = "services_genre/addNewGenre")
     public String addNew(Genre genre) {
         genreService.save(genre);
-        return "redirect:/services";
+        return "redirect:/services_genre";
     }
 
-    @RequestMapping(value = "services/updateGenre", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "services_genre/updateGenre", method = {RequestMethod.PUT, RequestMethod.GET})
     public String update(Genre genre){
         genreService.save(genre);
-        return "redirect:/services";
+        return "redirect:/services_genre";
     }
 
-    @RequestMapping(value = "services/deleteGenre", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @RequestMapping(value = "services_genre/deleteGenre", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(Long id) {
         genreService.delete(id);
-        return "redirect:/services";
+        return "redirect:/services_genre";
     }
 
-    @GetMapping("services/findByIdGenre")
+    @GetMapping("services_genre/findByIdGenre")
     public Optional<Genre> findById(Long id) {
         return genreService.findById(id);
     }
 
-    @GetMapping(value = "services/genre")
+    @GetMapping(value = "services_genre/genre")
     public String getGenres(Model model) {
         List<Genre> genres = genreService.getGenre();
         model.addAttribute("genres", genres);
-        return "services_album";
+        return "services_genre";
     }
 }

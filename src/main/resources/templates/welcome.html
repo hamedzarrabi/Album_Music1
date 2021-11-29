@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>
+    <span>Welcome : [[${#request.userPrincipal.principal.fullName}]]</span>
+    <span sec:authentication = "principal.authorities"></span>
+</h2>
+<div>
+    <select class="form-select" aria-label="Disabled select example" enable>
+
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+</div>
+<h1>Welcom Customer</h1>
+</body>
+</html>

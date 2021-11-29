@@ -19,32 +19,32 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("services/users")
+    @GetMapping("services_user")
     public String getUser(Model model) {
-        List<User> users = userService.getSinger();
+        List<User> users = userService.listAll();
         model.addAttribute("users", users);
-        return "services_album";
+        return "services_user";
     }
 
-    @PostMapping("services/addNewUser")
+    @PostMapping("services_user/addNewUser")
     public String addNew(User user){
-        userService.save(user);
-        return "redirect:/services";
+        userService.saveUserWithDefaultRole(user);
+        return "redirect:/services_user";
     }
 
-    @RequestMapping(value = "services/updateUser", method = {RequestMethod.GET, RequestMethod.PUT})
+    @RequestMapping(value = "services_user/updateUser", method = {RequestMethod.GET, RequestMethod.PUT})
     public String update(User user) {
         userService.save(user);
-        return "redirect:/services";
+        return "redirect:/services_user";
     }
 
-    @RequestMapping(value = "services/deleteUser", method = {RequestMethod.DELETE, RequestMethod.GET})
+    @RequestMapping(value = "services_user/deleteUser", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(Long id) {
         userService.delete(id);
-        return "redirect:/services";
+        return "redirect:/services_user";
     }
 
-    @GetMapping("services/findByIdUser")
+    @GetMapping("services_user/findByIdUser")
     public Optional<User> findById(Long id) {
         return userService.findById(id);
     }

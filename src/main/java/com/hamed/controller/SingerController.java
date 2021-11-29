@@ -1,14 +1,14 @@
 package com.hamed.controller;
 
+import com.hamed.model.Genre;
 import com.hamed.model.Singer;
+import com.hamed.service.GenreService;
 import com.hamed.service.SingerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,35 +17,42 @@ import java.util.Optional;
 public class SingerController {
 
     @Autowired private SingerService singerService;
+    @Autowired private GenreService genreService;
 
-    @PostMapping(value = "services/addNewSinger")
-    public String addNew(Singer singer) {
+    @PostMapping(value = "services_singer/addNew")
+    public String addNew(Singer singer, RedirectAttributes redirectAttributes) {
         singerService.save(singer);
-        return "redirect:/services";
+        redirectAttributes.addFlashAttribute("message", "The Singer been uploaded successfully.");
+        return "redirect:/services_singer";
     }
 
-    @RequestMapping(value = "services/updateSingers", method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = "services_singer/update", method = {RequestMethod.PUT, RequestMethod.GET})
     public String update(Singer singer){
         singerService.save(singer);
-        return "redirect:/services";
+        return "redirect:/services_singer";
     }
 
-    @RequestMapping(value = "services/deleteSinger", method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String delete(Long id) {
+    @RequestMapping(value = "services_singer/deleteSinger/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String delete(@PathVariable("id") Long id) {
         singerService.delete(id);
-        return "redirect:/services";
+        return "redirect:/services_singer";
     }
 
-    @GetMapping("services/findByIdSinger")
+    @GetMapping("services_singer/findById")
+    @ResponseBody
     public Optional<Singer> findById(Long id) {
         return singerService.findById(id);
     }
 
-    @GetMapping(value = "services/singers")
+    @GetMapping(value = "services_singer")
     public String getSingers(Model model) {
         List<Singer> singers = singerService.getSinger();
+        List<Genre> genres = genreService.getGenre();
+
         model.addAttribute("singers", singers);
-        return "services_album";
+        model.addAttribute("genres", genres);
+
+        return "services_singer";
     }
 
 
