@@ -8,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ApplicationController {
 
@@ -19,10 +23,6 @@ public class ApplicationController {
 		return "index";
 	}
 
-//	@GetMapping("/admin")
-//	public String goAdminPage() {
-//		return "admin";
-//	}
 
 	@GetMapping("/login")
 	public String loginPage() {

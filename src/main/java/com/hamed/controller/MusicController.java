@@ -4,7 +4,6 @@ import com.hamed.model.Album;
 import com.hamed.model.Votes;
 import com.hamed.repository.VoteRepository;
 import com.hamed.service.AlbumService;
-import com.hamed.service.GenreService;
 import com.hamed.service.SingerService;
 import com.hamed.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class MusicController {
         return "services_music_customer";
     }
 
-    @GetMapping("/musics/findById")
+    @GetMapping("/musics/findById/{id}")
     @ResponseBody
     public Optional<Album> findById(Long id) {
         return albumService.findById(id);
@@ -46,5 +45,7 @@ public class MusicController {
         voteRepository.save(votes);
         return "redirect:/musics";
     }
+
+
 
 }

@@ -42,13 +42,14 @@ public class Album {
 	@ManyToOne
 	private Genre genre;
 
-
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
+	private List<Order> order;
 
 	@ManyToMany()
 	@JoinTable(name = "singer_album")
 	private List<Singer> singer;
 
-	@OneToMany(mappedBy = "album")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
 	private List<Votes> votes;
 
 	@NotNull(message = "is required")

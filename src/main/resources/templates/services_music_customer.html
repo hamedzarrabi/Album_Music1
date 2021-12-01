@@ -243,17 +243,22 @@
 
                 </td>
                 <td>
-                    <form method="post" th:action="@{/cart}">
+                    <form method="post" th:action="@{/cartview}" >
                     <div class="btn-group d-flex">
 
-                        <input type="hidden" th:value="${alb.id}">
-                        <button th:href="@{/services_music_customer/findById/(id=${alb.id})}"
-                                class="btn btn-success"><i class="fa fa-cloud-download"></i></button>
+                        <input type="hidden" th:value="${alb.id}" name="album">
+
+                        <div th:each="user : ${userService}">
+                            <input type="hidden" th:value="${user.id}" name="user">
+                        </div>
+
+                        <button type="submit" class="btn btn-danger"  ><i class="fa fa-cart-plus"></i></button>
 
 
                     </div>
 
                     </form>
+
                 </td>
             </tr>
             </tbody>

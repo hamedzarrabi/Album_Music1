@@ -28,6 +28,7 @@
     <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -43,6 +44,80 @@
         background-color: #f03c02 !important;
         color: white !important;
     }
+    .qty .count {
+        color: #000;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 30px;
+        padding: 0 2px
+    ;min-width: 35px;
+        text-align: center;
+        height: 20px;
+    }
+    .qty .plus {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+        color: white;
+        width: 20px;
+        height: 20px;
+        font: 20px/1 Arial,sans-serif;
+        text-align: center;
+        border-radius: 50%;
+    }
+    .qty .minus {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+        color: white;
+        width: 20px;
+        height: 20px;
+        font: 20px/1 Arial,sans-serif;
+        text-align: center;
+        border-radius: 50%;
+        background-clip: padding-box;
+    }
+    div {
+        text-align: center;
+    }
+    .minus:hover{
+        background-color: #717fe0 !important;
+    }
+    .plus:hover{
+        background-color: #717fe0 !important;
+    }
+    /*Prevent text selection*/
+    span{
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+    input{
+        border: 0;
+        width: 2%;
+    }
+    nput::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input:disabled{
+        background-color:white;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
 </style>
 <body>
 
@@ -122,33 +197,52 @@
 
 
 
-<div class="container my-5" th:fragment="quantity_control">
+<div class="container my-5">
 
     <div class="d-flex justify-content-between">
 
         <div class="col-8">
 
-            <table class="table table-striped">
-                <thead class="table-dark">
+            <!--/*@thymesVar id="order" type=""*/-->
+            <table class="table table-striped table-bordered">
+                <thead class="bg-secondary">
+
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Album Name</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Option</th>
+                    <th>ID</th>
+                    <th>Album Name</th>
+                    <th>Date Publish</th>
+                    <th>Price</th>
+                    <th>Genre</th>
+                    <th class="text-center">Demo</th>
+                    <th class="text-center">Quantity</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>@mdo</td>
+                <tr th:each="alb : ${cart}">
+                    <td th:text="${alb.id}">ID</td>
+                    <td th:text="${alb.name}">Name</td>
+                    <td th:text="${alb.datePublish}">Date Publish</td>
+                    <td th:text="${alb.price}"></td>
+                    <td th:text="${alb.genre.genre}">Genre</td>
+                    <td>
+                        <div class="col">
+                            <audio controls>
+                                <source th:src="@{${alb.music_album}}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <div class="qty mt-2">
+                            <span class="minus bg-dark">-</span>
+                            <input type="number" class="count mx-2" name="quantity" value="1">
+                            <span class="plus bg-dark">+</span>
+                        </div>
+                    </td>
+
                 </tr>
                 </tbody>
             </table>
-
         </div>
 
 
@@ -268,7 +362,23 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script>
+    $(document).ready(function(){
+        $('.count').prop('disabled', true);
+        $(document).on('click','.plus',function(){
+            $('.count').val(parseInt($('.count').val()) + 1 );
+        });
+        $(document).on('click','.minus',function(){
+            $('.count').val(parseInt($('.count').val()) - 1 );
+            if ($('.count').val() == 0) {
+                $('.count').val(1);
+            }
+        });
+    });
+</script>
 </body>
 
 </html>

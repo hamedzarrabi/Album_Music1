@@ -40,6 +40,9 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Votes> vote;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Order> order;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "users_roles",

@@ -7,6 +7,7 @@ import com.hamed.service.AlbumService;
 import com.hamed.service.GenreService;
 import com.hamed.service.SingerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes("cart")
+@SessionAttributes( {"shop"})
 public class AlbumController {
 
     @Autowired private AlbumService albumService;
@@ -53,8 +55,6 @@ public class AlbumController {
     @RequestMapping (value = "/services_album/deleteAlbum", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String delete(Long id) throws IOException {
 
-//        Path path = Paths.get(album.getMusic_album());
-//        Files.delete(path);
         albumService.delete(id);
 
         return "redirect:/services_album";
@@ -87,11 +87,7 @@ public class AlbumController {
         return "services_album";
     }
 
-    @ModelAttribute(name = "cart")
-    @PostMapping("/cart")
-    public String viewCart(Model model) {
-        model.addAttribute("cart", albumService.getAlbum());
-        return "redirect:/cart";
-    }
+
+
 
 }
